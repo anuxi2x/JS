@@ -1,0 +1,128 @@
+:root {
+	--primary-color: #4DA4EA;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body,
+button {
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.header {
+	box-shadow: rgba(27, 31, 35, 0.04) 0px 1px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px inset;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.showListButton, .liButton {
+	all: unset;
+	cursor: pointer;
+	background-color: var(--primary-color);
+	color: #fff;
+	padding: 12px 24px;
+	min-width: 200px;
+	text-align: center;
+	border-radius: 4px;
+	border: 1px solid var(--primary-color);
+	transition: .3s;
+}
+
+.showListButton:hover, 
+.liButton:hover {
+	background-color: transparent;
+	color: rgb(130, 224, 255);
+}
+
+.showListButton:disabled {
+	opacity: 0.3;
+	cursor: not-allowed;
+}
+
+.main {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 25px;
+	text-decoration: none;
+}
+
+.list {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	list-style: none;
+	width: 70%;
+}
+
+.listItem {
+	width: 100%;
+	border-radius: 4px;
+	box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
+	padding: 20px;
+	margin-bottom: 5px;
+	display: flex;
+	gap: 12px;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.completed {
+	background-color: #7fffd462;
+}
+
+.completed p {
+	text-decoration: line-through;
+}
+
+.not_completed {
+	background-color: #ff9c9ca4;
+}
+
+.maninpulations-block {
+	display: flex;
+	gap: 16px;
+}
+
+.maninpulations-block {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding-top: 20px;
+}
+
+.hidden {
+	display: none;	
+}
+
+.add-todo,
+.search-todo {
+	all: unset;
+	border-radius: 4px;
+	box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
+	padding: 8px;
+}
+
+.maninpulations-block button {
+	all: unset;
+	cursor: pointer;
+	background-color: var(--primary-color);
+	color: #fff;
+	padding: 8px 16px;
+	width: 50px;
+	text-align: center;
+	border-radius: 4px;
+	border: 1px solid var(--primary-color);
+	transition: .3s;
+}
+
+.maninpulations-block button:hover {
+	background-color: transparent;
+	color: rgb(130, 224, 255);
+}

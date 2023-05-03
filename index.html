@@ -5,8 +5,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <header class="header" id="header">
+        <button class="showListButton" id="showListButton">
+            Show Todos
+        </button>
+    </header>
+
+    <div class="maninpulations-block hidden">
+        <div class="add-block">
+            <input type="text" placeholder="Add todo" class="add-todo">
+            <button>Add</button>
+        </div>
+        <div class="search-block">
+            <input type="text" placeholder="Search for todo" class="search-todo">
+            <button>Search</button>
+        </div>
+        
+    </div>
+
+    <main class="main" id="main"></main>
+    <script src="main.js"></script>
 </body>
 </html>
