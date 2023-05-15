@@ -7,18 +7,10 @@ async function getTodos() {
     return data
 }
 
-const createLoader = () => {
-    const loader = document.createElement('div')
-    loader.classList.add('loader')
-    loader.innerText = 'Loading...'
-    return loader
-}
-
 
 async function showBtnClickHandler() {
-    const loader = createLoader()
-    document.body.appendChild(loader)
-
+    const loader = document.querySelector('.rocket-loader')
+    loader.style.display = 'inherit'
     const todos = await getTodos()
     const ul = document.createElement('ul')
     ul.classList.add('list')
@@ -34,11 +26,20 @@ async function showBtnClickHandler() {
         text.innerText = element.title;
 
         liButton.addEventListener('click', changeStatus)
+        li.addEventListener('click', changeTodo)
+        li.addEventListener("mouseover", () => {
+            li.style.cursor = 'pointer'
+        })
+
+        function changeTodo () {
+            const liHover = document.querySelector('.changeTodo')
+            liHover.style.display = 'inherit'
+        }
+    
 
         li.appendChild(text)
         li.appendChild(liButton)
         ul.appendChild(li) 
-
         if(element.completed) {
             li.classList.add('completed')
             text.classList.add('completed_text')
@@ -49,6 +50,28 @@ async function showBtnClickHandler() {
             text.nextSibling.innerText = 'not completed!'
         }      
     });
+    
+    const addTodo = () => {
+        const inputText = document.querySelector('.add-block input').value
+        const li = document.createElement('li')
+        const liButton = document.createElement('button')
+        const text = document.createElement('p')
+        const list = document.querySelector('.main .list')
+        text.classList.add('text')
+        liButton.classList.add('liButton')
+        li.classList.add('listItem')
+        text.innerText = inputText;
+        li.classList.add('not_completed')
+        liButton.innerText = 'not completed!'
+        liButton.addEventListener('click', changeStatus)
+        li.appendChild(text)
+        li.appendChild(liButton)
+        list.appendChild(li)
+        document.querySelector('.add-block input').value = ''
+    }
+    
+
+    document.querySelector('.add-block button').addEventListener('click', addTodo)
 
     main.appendChild(ul)
     document.body.removeChild(loader)
@@ -58,29 +81,8 @@ async function showBtnClickHandler() {
     const manipulationBlock = document.getElementsByClassName('maninpulations-block')[0]
     manipulationBlock.classList.remove('hidden')
 
-    document.querySelector('.add-block button').addEventListener('click', addTodo)
-
     document.querySelector('.search-block button').addEventListener('click', searchForTodos)
-}
 
-const addTodo = () => {
-    const inputText = document.querySelector('.add-block input').value
-    const li = document.createElement('li')
-    const liButton = document.createElement('button')
-    const text = document.createElement('p')
-    text.classList.add('text')
-    liButton.classList.add('liButton')
-    li.classList.add('listItem')
-    text.innerText = inputText;
-    li.classList.add('not_completed')
-    liButton.innerText = 'not completed!'
-    liButton.addEventListener('click', changeStatus)
-    // add new todo on top of all todos ------------------------------------------ NOT COMPLETED
-
-    li.appendChild(text)
-    li.appendChild(liButton)
-    document.querySelector('.list').appendChild(li)
-    document.querySelector('.add-block input').value = ''
 }
 
 const searchForTodos = () => {
@@ -89,12 +91,14 @@ const searchForTodos = () => {
     for(let item of list) {
         if(!item.innerText.toLowerCase().includes(inputText)){
             item.style.display = 'none'
+        } else {
+            item.style.display = 'inherit'
         }
     }
     document.querySelector('.search-block input').value = ''
 }
 
-
+const searchTodoButton = document.getElementsByClassName('search-todo')
 
 showListButton.addEventListener('click', showBtnClickHandler)
 
@@ -110,4 +114,20 @@ function changeStatus(e) {
         classList.add('not_completed')
         target.innerText = 'not completed!'
     }
+}
+
+const cancelButton = document.querySelector('.cancel')
+cancelButton.addEventListener('click', cancelAction)
+
+function cancelAction (event) {
+    document.querySelector('.changeTodo').style.display = 'none'    
+    event.target.previousSibling.previousSibling.previousSibling.previousElementSibling.value = ''
+}
+
+const confirmButton = document.querySelector('.confirm')
+confirmButton.addEventListener('click', confirmAction)
+
+function confirmAction (event) {
+    document.querySelector('.changeTodo').style.display = 'none'  
+    event.target.previousSibling.previousElementSibling.value = ''
 }

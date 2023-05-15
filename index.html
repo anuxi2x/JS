@@ -8,11 +8,28 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <div class="changeTodo">
+        <div class="changeEvent">
+            <textarea name="inputText" id="textarea" width="432px" rows="6" placeholder="New Todo Text"></textarea>
+            <button class="text_area_btn confirm">Confirm</button>
+            <button class="text_area_btn cancel">Cancel</button>
+        </div>
+    </div>
+
     <header class="header" id="header">
         <button class="showListButton" id="showListButton">
             Show Todos
         </button>
+        <div class="weather"></div>
     </header>
+
+    <div class="rocket-loader">
+        <div class="rocket">
+            <div class="rocket-extras"></div>
+            <div class="jet"><span></span></div>
+        </div>
+    </div>
 
     <div class="maninpulations-block hidden">
         <div class="add-block">
@@ -28,5 +45,6 @@
 
     <main class="main" id="main"></main>
     <script src="main.js"></script>
+    <script src="weather.js"></script>
 </body>
 </html>
