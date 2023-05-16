@@ -39,6 +39,7 @@ async function showBtnClickHandler(eventTarget) {
         li.appendChild(text)
         li.appendChild(liButton)
         ul.appendChild(li) 
+
         if(element.completed) {
             li.classList.add('completed')
             text.classList.add('completed_text')
