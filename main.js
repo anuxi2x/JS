@@ -8,7 +8,7 @@ async function getTodos() {
 }
 
 
-async function showBtnClickHandler() {
+async function showBtnClickHandler(eventTarget) {
     const loader = document.querySelector('.rocket-loader')
     loader.style.display = 'inherit'
     const todos = await getTodos()
@@ -26,17 +26,16 @@ async function showBtnClickHandler() {
         text.innerText = element.title;
 
         liButton.addEventListener('click', changeStatus)
-        li.addEventListener('click', changeTodo)
-        li.addEventListener("mouseover", () => {
+        text.addEventListener('click', changeTodo)
+        text.addEventListener("mouseover", () => {
             li.style.cursor = 'pointer'
         })
 
-        function changeTodo () {
+        function changeTodo (event) {
             const liHover = document.querySelector('.changeTodo')
             liHover.style.display = 'inherit'
         }
-    
-
+        
         li.appendChild(text)
         li.appendChild(liButton)
         ul.appendChild(li) 
@@ -48,7 +47,7 @@ async function showBtnClickHandler() {
             li.classList.add('not_completed')
             text.classList.add('not_completed_text')
             text.nextSibling.innerText = 'not completed!'
-        }      
+        }    
     });
     
     const addTodo = () => {
