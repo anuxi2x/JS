@@ -19,6 +19,7 @@ async function showBtnClickHandler(eventTarget) {
         const li = document.createElement('li')
         const liButton = document.createElement('button')
         const text = document.createElement('p')
+        text.setAttribute('data-item-id', element.id)
         
         text.classList.add('text')
         liButton.classList.add('liButton')
@@ -31,9 +32,10 @@ async function showBtnClickHandler(eventTarget) {
             li.style.cursor = 'pointer'
         })
 
-        function changeTodo (event) {
+        function changeTodo () {
             const liHover = document.querySelector('.changeTodo')
             liHover.style.display = 'inherit'
+            liHover.querySelector('button').setAttribute('data-item-id', element.id)
         }
         
         li.appendChild(text)
@@ -128,6 +130,8 @@ const confirmButton = document.querySelector('.confirm')
 confirmButton.addEventListener('click', confirmAction)
 
 function confirmAction (event) {
-    document.querySelector('.changeTodo').style.display = 'none'  
-    event.target.previousSibling.previousElementSibling.value = ''
+    const datasetSelector = '[data-item-id="' + event.target.dataset.itemId + '"]'
+    const p = document.querySelector(`.list ${datasetSelector}`)
+    p.innerText = event.target.previousSibling.previousElementSibling.value
+    document.querySelector('.changeTodo').style.display = 'none'
 }
