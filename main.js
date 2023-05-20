@@ -8,7 +8,7 @@ async function getTodos() {
 }
 
 
-async function showBtnClickHandler() {
+async function showBtnClickHandler(eventTarget) {
     const loader = document.querySelector('.rocket-loader')
     loader.style.display = 'inherit'
     const todos = await getTodos()
@@ -19,6 +19,7 @@ async function showBtnClickHandler() {
         const li = document.createElement('li')
         const liButton = document.createElement('button')
         const text = document.createElement('p')
+        text.setAttribute('data-item-id', element.id)
         
         text.classList.add('text')
         liButton.classList.add('liButton')
@@ -26,20 +27,21 @@ async function showBtnClickHandler() {
         text.innerText = element.title;
 
         liButton.addEventListener('click', changeStatus)
-        li.addEventListener('click', changeTodo)
-        li.addEventListener("mouseover", () => {
+        text.addEventListener('click', changeTodo)
+        text.addEventListener("mouseover", () => {
             li.style.cursor = 'pointer'
         })
 
         function changeTodo () {
             const liHover = document.querySelector('.changeTodo')
             liHover.style.display = 'inherit'
+            liHover.querySelector('button').setAttribute('data-item-id', element.id)
         }
-    
-
+        
         li.appendChild(text)
         li.appendChild(liButton)
         ul.appendChild(li) 
+
         if(element.completed) {
             li.classList.add('completed')
             text.classList.add('completed_text')
@@ -48,7 +50,7 @@ async function showBtnClickHandler() {
             li.classList.add('not_completed')
             text.classList.add('not_completed_text')
             text.nextSibling.innerText = 'not completed!'
-        }      
+        }    
     });
     
     const addTodo = () => {
@@ -128,6 +130,8 @@ const confirmButton = document.querySelector('.confirm')
 confirmButton.addEventListener('click', confirmAction)
 
 function confirmAction (event) {
-    document.querySelector('.changeTodo').style.display = 'none'  
-    event.target.previousSibling.previousElementSibling.value = ''
+    const datasetSelector = '[data-item-id="' + event.target.dataset.itemId + '"]'
+    const p = document.querySelector(`.list ${datasetSelector}`)
+    p.innerText = event.target.previousSibling.previousElementSibling.value
+    document.querySelector('.changeTodo').style.display = 'none'
 }
